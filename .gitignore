@@ -34,8 +34,8 @@ config.ini
 # .idea/artifacts
 # .idea/compiler.xml
 # .idea/jarRepositories.xml
-# .idea/modules.xml
-# .idea/*.iml
+#.idea/modules.xml
+#.idea/*.iml
 # .idea/modules
 # *.iml
 # *.ipr
