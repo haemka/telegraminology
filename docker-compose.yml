@@ -1,0 +1,9 @@
+version: '3.0'
+
+services:
+  bot:
+    build: .
+    volumes:
+      - type: bind
+        source: ./config.ini
+        target: /app/config.ini
