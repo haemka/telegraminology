@@ -83,7 +83,11 @@ class SnomedBot:
         codesystem = "ICD-10"
         self.logger.info(f"Message {update.message.text} matched {codesystem}.")
         try:
-            term = self.fetch(update.message.text, codesystem)['title']['@value']
+            r = self.fetch(update.message.text, codesystem)
+            if not r:
+                raise KeyError
+            else:
+                term = r['title']['@value']
         except KeyError:
             term = None
         if term:
