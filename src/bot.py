@@ -28,6 +28,8 @@ class SnomedBot:
         dispatcher.add_handler(icd10_regex_handler)
         snomed_regex_handler = MessageHandler(Filters.regex(r"^\d{6,}$"), self.snomed_re)
         dispatcher.add_handler(snomed_regex_handler)
+        loinc_regex_handler = MessageHandler(Filters.regex(r"^\d{3,7}-\d$"), self.loinc_re)
+        dispatcher.add_handler(loinc_regex_handler)
         updater.start_polling()
 
     def check_oauth2_token(self, codesystem):
@@ -103,6 +105,12 @@ class SnomedBot:
         if term:
             context.bot.send_message(chat_id=update.effective_chat.id,
                                      text=f"That looks suspiciously like the SNOMED-CT concept ID for \"{term}\". ☝️🤓")
+
+    def loinc_re(self, update: Update, context: CallbackContext):
+        codesystem = "LOINC"
+        code = update.message.text
+        context.bot.send_message(chat_id=update.effective_chat.id,
+                                 text=f"I don't speak LOINC! Therefore I'm not able to translate \"{code}\" for you. 😥")
 
 
 if __name__ == '__main__':
